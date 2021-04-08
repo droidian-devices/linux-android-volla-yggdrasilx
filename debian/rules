@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+include /usr/share/linux-packaging-snippets/kernel-snippet.mk
+
+%:
+	dh $@
+
+out/KERNEL_OBJ/initramfs.gz:
+	cp /usr/lib/arm-linux-gnueabihf/halium-generic-initramfs/initrd.img-halium-generic $@
+
+out/KERNEL_OBJ/recovery-initramfs.gz:
+	cp /usr/lib/arm-linux-gnueabihf/halium-generic-initramfs/recovery-initramfs.img-halium-generic $@
+
+out/KERNEL_OBJ/vbmeta.img:
+	avbtool make_vbmeta_image --flags 2 --padding_size 4096 --set_hashtree_disabled_flag --output "out/KERNEL_OBJ/vbmeta.img"
+
+execute_before_dh_auto_configure:
+	ln -sf /opt/android/prebuilts/python/2.7.5/bin/python2 /usr/bin/python2
+	
+execute_after_dh_auto_build:
+	python2 /usr/bin/avbtool append_vbmeta_image --image "out/KERNEL_OBJ/boot.img" --partition_size "$(DEVICE_BOOT_PARTITION_SIZE)" --vbmeta_image "out/KERNEL_OBJ/vbmeta.img"
+	python2 /usr/bin/avbtool append_vbmeta_image --image "out/KERNEL_OBJ/recovery.img" --partition_size "$(DEVICE_BOOT_PARTITION_SIZE)" --vbmeta_image "out/KERNEL_OBJ/vbmeta.img"
+
+override_dh_dwz:
