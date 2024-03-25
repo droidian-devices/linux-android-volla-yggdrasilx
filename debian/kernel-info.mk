@@ -35,7 +35,7 @@ KERNEL_IMAGE_WITH_DTB = 1
 KERNEL_IMAGE_DTB = arch/arm64/boot/dts/mediatek/mt6763.dtb
 
 # Whether to include a DTB Overlay. Use 0 (no) or 1.
-KERNEL_IMAGE_WITH_DTB_OVERLAY = 0
+KERNEL_IMAGE_WITH_DTB_OVERLAY = 1
 
 # Path to the DTB overlay.
 # If you leave this undefined, an attempt to find it automatically
