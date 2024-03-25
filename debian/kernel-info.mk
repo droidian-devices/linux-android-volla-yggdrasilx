@@ -69,7 +69,7 @@ DEVICE_BOOT_PARTITION_SIZE = 33554432
 ########################################################################
 
 # Whether to enable kernel upgrades on package upgrades. Use 0 (no) or 1.
-FLASH_ENABLED = 1
+FLASH_ENABLED = 0
 
 # `flash-bootimage` defaults are enough for most recent devices, but legacy
 # devices won't work out of the box.
