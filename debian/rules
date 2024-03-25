@@ -11,6 +11,12 @@ out/KERNEL_OBJ/initramfs.gz:
 out/KERNEL_OBJ/initramfs.recovery-gz:
 	cp /usr/lib/arm-linux-gnueabihf/halium-generic-initramfs/recovery-initramfs.img-halium-generic $@
 
+out/KERNEL_OBJ/initramfs.lz4:
+	cp /usr/lib/arm-linux-gnueabihf/halium-generic-initramfs/initrd.img-halium-generic.lz4 $@
+
+out/KERNEL_OBJ/initramfs.recovery-lz4:
+	cp /usr/lib/arm-linux-gnueabihf/halium-generic-initramfs/recovery-initramfs.img-halium-generic.lz4 $@
+
 out/KERNEL_OBJ/vbmeta.img:
 	avbtool make_vbmeta_image --flags 2 --padding_size 4096 --set_hashtree_disabled_flag --output "out/KERNEL_OBJ/vbmeta.img"
 
